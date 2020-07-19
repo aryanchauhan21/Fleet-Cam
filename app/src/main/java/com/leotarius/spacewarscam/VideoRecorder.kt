@@ -1,12 +1,23 @@
 package com.leotarius.spacewarscam
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.res.Configuration
 import android.media.CamcorderProfile
 import android.media.MediaRecorder
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Size
 import android.view.Surface
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.ar.sceneform.SceneView
+import java.io.File
+import java.io.FileDescriptor
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 class VideoRecorder(
     private val activity: Activity
@@ -38,6 +49,11 @@ class VideoRecorder(
         mediaRecorder?.apply {
             setVideoSource(MediaRecorder.VideoSource.SURFACE)
             setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
+                setOutputFile(buildFile()?.absolutePath)
+            } else{
+                setOutputFile(buildFileApi29())
+            }
             setVideoEncodingBitRate(bitRate)
             setVideoFrameRate(frameRate)
             setVideoSize(videoSize.width, videoSize.height)
@@ -45,6 +61,30 @@ class VideoRecorder(
             prepare()
             start()
         }
+    }
+
+    private fun buildFile(): File?{
+        val date = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date())
+        val path =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)?.absolutePath+
+                "/TryOutFurniture/${date}_video.jpg"
+        val file = File(path)
+        val dir = file.parentFile
+        if(!dir.exists()){
+            dir.mkdirs()
+        }
+        return file
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private fun buildFileApi29(): FileDescriptor? {
+        val date = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date())
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "${date}_video.mp4")
+            put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, "Movies/SpaceWarsCam")
+        }
+        val uri = activity.contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues)
+        return activity.contentResolver.openFileDescriptor(uri?: return null, "w")?.fileDescriptor
     }
 
     fun toggleRecordingState(): Boolean{
@@ -57,7 +97,11 @@ class VideoRecorder(
     }
 
     private fun startRecording(){
-        setUpMediaRecorder()
+        try{
+            setUpMediaRecorder()
+        }catch (e: Exception){
+            Toast.makeText(activity, "Error recording the video.", Toast.LENGTH_LONG).show()
+        }
         encoderSurface = mediaRecorder?.surface
         sceneView.startMirroringToSurface(encoderSurface, 0, 0, videoSize.width, videoSize.height)
         isRecording = true

@@ -2,6 +2,7 @@ package com.leotarius.spacewarscam
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.media.CamcorderProfile
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     var heightAboveGround: Float = 0f
     var rotationSpeeed: Float = 0f
     var modelId: Int = R.raw.star_destroyer
+    private lateinit var videoRecorder: VideoRecorder
+    private var isRecording = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,12 @@ class MainActivity : AppCompatActivity() {
         arFragment = fragment as ArFragment
 
         setUpBottomSheet()
+        setUpFab()
+
+        videoRecorder = VideoRecorder(this).apply {
+            sceneView = arFragment.arSceneView
+            setVideoQuality(CamcorderProfile.QUALITY_720P, resources.configuration.orientation)
+        }
 
         star_destroyer.setOnClickListener {
             modelId = R.raw.star_destroyer
@@ -80,6 +89,20 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: adding to scene")
         }
 
+    }
+
+    private fun setUpFab() {
+        fab.setOnClickListener {
+            if (!isRecording){
+                fab.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#eb2f06"))
+                Toast.makeText(this, "Recording started", Toast.LENGTH_SHORT).show()
+                isRecording = videoRecorder.toggleRecordingState()
+            } else{
+                fab.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#ffd32a"))
+                isRecording = videoRecorder.toggleRecordingState()
+                Toast.makeText(this, "Recording saved to gallery", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun warshipUiUpdate() {
