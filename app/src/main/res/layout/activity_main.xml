@@ -163,7 +163,7 @@
                     android:layout_weight="0.7"
                     android:contentDescription="Height from ground"
                     android:value="1"
-                    android:valueFrom="0.2"
+                    android:valueFrom="0.0"
                     android:valueTo="2.5"
                     app:haloColor="#fffa65"
                     app:thumbColor="#fff200"
@@ -199,7 +199,7 @@
                     android:contentDescription="Distance from center"
                     android:value="2"
                     android:valueFrom="0.5"
-                    android:valueTo="4.0"
+                    android:valueTo="5.0"
                     app:haloColor="#fffa65"
                     app:thumbColor="#fff200"
                     app:trackColor="#fffa65" />
