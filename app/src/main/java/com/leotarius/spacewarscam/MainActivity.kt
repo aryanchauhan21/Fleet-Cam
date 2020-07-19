@@ -2,6 +2,7 @@ package com.leotarius.spacewarscam
 
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.service.autofill.VisibilitySetterAction
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     var distanceFromCenter: Float = 0f
     var heightAboveGround: Float = 0f
     var rotationSpeeed: Float = 0f
+    var modelId: Int = R.raw.star_destroyer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,19 @@ class MainActivity : AppCompatActivity() {
         arFragment = fragment as ArFragment
 
         setUpBottomSheet()
+
+        star_destroyer.setOnClickListener {
+            modelId = R.raw.star_destroyer
+            warshipUiUpdate()
+        }
+        x_wing.setOnClickListener {
+            modelId = R.raw.xwing
+            warshipUiUpdate()
+        }
+        tie_silencer.setOnClickListener {
+            modelId = R.raw.tie_silencer
+            warshipUiUpdate()
+        }
 
         centreNode = Node()
         centreNode.setParent(arFragment.arSceneView.scene)
@@ -60,15 +75,26 @@ class MainActivity : AppCompatActivity() {
             rotationSpeeed = speed.value
 
             // loading the model and adding to scene
-            loadModelAndAddToScene(R.raw.star_destroyer)
+            loadModelAndAddToScene(modelId)
 
             Log.d(TAG, "onCreate: adding to scene")
         }
 
     }
 
+    private fun warshipUiUpdate() {
+        tie_silencer.setBackgroundColor(Color.parseColor("#66353b48"))
+        star_destroyer.setBackgroundColor(Color.parseColor("#66353b48"))
+        x_wing.setBackgroundColor(Color.parseColor("#66353b48"))
+
+        when(modelId){
+            R.raw.tie_silencer -> tie_silencer.setBackgroundColor(Color.parseColor("#CC2f3640"))
+            R.raw.xwing -> x_wing.setBackgroundColor(Color.parseColor("#CC2f3640"))
+            R.raw.star_destroyer -> star_destroyer.setBackgroundColor(Color.parseColor("#CC2f3640"))
+        }
+    }
+
     private fun updateCenterNode() {
-//        Log.d(TAG, "updateCenterNode")
         currCamPosition = arFragment.arSceneView.scene.camera.worldPosition
         centreNode.worldPosition = Vector3(currCamPosition.x, 0f, currCamPosition.z)
     }

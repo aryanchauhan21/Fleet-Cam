@@ -59,75 +59,78 @@
 
         <LinearLayout
             android:id="@+id/ships"
-            android:background="#66353b48"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="150dp"
             android:weightSum="3"
             android:orientation="horizontal">
 
-            <ImageView
+            <LinearLayout
+                android:id="@+id/star_destroyer"
+                android:background="#CC2f3640"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/star_destroyer"
-                android:scaleType="fitXY"
-            />
-            <ImageView
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/star_destroyer"
+                    android:scaleType="fitXY"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Star Destroyer"
+                    android:gravity="center"
+                    android:textColor="#f6e58d"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tie_silencer"
                 android:layout_width="0dp"
+                android:background="#66353b48"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/tie_silencer"
-                android:scaleType="fitXY"
-                />
-            <ImageView
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/tie_silencer"
+                    android:scaleType="fitXY"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Tie Silencer"
+                    android:gravity="center"
+                    android:textColor="#f6e58d"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/x_wing"
                 android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/xwing"
-                android:scaleType="fitXY"
-                />
-        </LinearLayout>
+                android:orientation="vertical"
+                android:background="#66353b48">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/xwing"
+                    android:scaleType="fitXY"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="Star Destroyer"
+                    android:gravity="center"
+                    android:textColor="#f6e58d"
+                    />
+            </LinearLayout>        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3"
-            android:background="#66353b48"
-            android:paddingBottom="5dp"
-            >
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="15sp"
-                android:text="Star Destroyer"
-                android:textColor="#fffa65"
-                android:gravity="center"
-                />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="15sp"
-                android:text="Tie Silencer"
-                android:textColor="#fffa65"
-                android:gravity="center"
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:textSize="15sp"
-                android:text="X-Wing"
-                android:textColor="#fffa65"
-                android:gravity="center"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
