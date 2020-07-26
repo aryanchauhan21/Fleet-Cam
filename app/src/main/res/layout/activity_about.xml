@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/title_background"
+        android:fontFamily="@font/baumans"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingTop="6dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="Credits"
+        android:textColor="#fff200"
+        android:textSize="36sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        android:padding="10dp"
+        >
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#57606f"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:autoLink="web"
+            android:text="3D Model - T-65 X-Wing Starfighter\nURL: https://poly.google.com/view/100p3RNw-5Q\nAuthor: Ti Kawamoto\nLicence: Public / Remixable (CC-BY)"
+            android:textIsSelectable="true"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#57606f"
+            android:layout_marginTop="15dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="3D Model - Tie Silencer\nURL: https://poly.google.com/view/e9304dCBHCb\nAuthor: Romain Revert\nLicence: Public / Remixable (CC-BY)"
+            android:textIsSelectable="true"
+            android:autoLink="web"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#57606f"
+            android:layout_marginTop="15dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="3D Model - Star Destroyer\nURL: https://poly.google.com/view/4_f9kQdE8Lg\nAuthor: Digi Factor\nLicence: Public / Remixable (CC-BY)"
+            android:textIsSelectable="true"
+            android:autoLink="web"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3d3d3d"
+            android:layout_marginTop="20dp"
+            android:padding="8dp"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="App creator: Aryan Chauhan\nWebsite: https://sites.google.com/view/aryanchauhan/home"
+            android:textIsSelectable="true"
+            android:autoLink="web"
+            />
+
+
+    </LinearLayout>
+    
+    
+</androidx.constraintlayout.widget.ConstraintLayout>
