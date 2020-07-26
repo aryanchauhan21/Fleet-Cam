@@ -14,7 +14,7 @@
 
         <fragment
             android:id="@+id/fragment"
-            android:name="com.leotarius.FleetCam.CustomArFragment"
+            android:name="com.leotarius.SpaceWarsCam.CustomArFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

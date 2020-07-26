@@ -1,4 +1,4 @@
-package com.leotarius.FleetCam
+package com.leotarius.SpaceWarsCam
 
 sealed class Warship {
     abstract val rotationDegree: Float

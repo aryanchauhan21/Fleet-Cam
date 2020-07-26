@@ -1,4 +1,4 @@
-package com.leotarius.FleetCam
+package com.leotarius.SpaceWarsCam
 
 import android.animation.ObjectAnimator
 import android.view.animation.LinearInterpolator

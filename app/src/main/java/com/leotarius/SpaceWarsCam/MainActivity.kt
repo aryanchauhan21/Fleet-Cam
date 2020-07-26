@@ -1,4 +1,4 @@
-package com.leotarius.FleetCam
+package com.leotarius.SpaceWarsCam
 
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -33,11 +33,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        about.setOnClickListener{
-           val intent = Intent(this, AboutActivity::class.java)
-            startActivity(intent)
-        }
 
         arFragment = fragment as ArFragment
 
@@ -86,6 +81,11 @@ class MainActivity : AppCompatActivity() {
             loadModelAndAddToScene(modelId)
 
             Log.d(TAG, "onCreate: adding to scene")
+        }
+
+        about.setOnClickListener{
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
         }
 
     }
