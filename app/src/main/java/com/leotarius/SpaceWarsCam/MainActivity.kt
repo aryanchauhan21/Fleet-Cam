@@ -7,7 +7,10 @@ import android.media.CamcorderProfile
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewTreeObserver
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.ar.sceneform.Node
@@ -158,7 +161,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpBottomSheet() {
         val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.peekHeight = ships.top
+
+        val inner = bottomSheet
+        inner.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                inner.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                val hidden = inner.getChildAt(1)
+                bottomSheetBehavior.peekHeight = hidden.top
+            }
+        })
+
+        bottomSheetBehavior.isGestureInsetBottomIgnored = true
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
